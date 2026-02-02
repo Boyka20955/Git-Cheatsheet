@@ -1,71 +1,296 @@
 # Git-Cheatsheet
 Done By:Francis Irungu(firungu114@gmail.com)
-To View user.name and email
+
+🔹 1. Configuration & Setup
+
+git config --global user.name "Name"
+Sets your username for all repositories.
+
+git config --global user.email "email"
+Sets your email globally.
+
 git config --list
+Displays all Git configuration settings.
 
-To Get Help:
-=> git help => git help
+git config --global core.editor code
+Sets VS Code as the default editor.
 
-Initialize a Repository
-=> git init
+git help
+Shows general Git help.
 
-To Add File To Staging Area
-=> git add filename => git add filename1 filename2 => git add . [To Add All Files In Directory]
+git help <command>
+Shows help for a specific command.
 
-To Commit Change
-=> git commit -m 'Short and Sweet Message' => git commit -am 'Staging and Comit Directly'
+🔹 2. Repository Creation
 
-Clone Existing Repository
-=> git clone <project_url>
+git init
+Creates a new empty Git repository.
 
-Checking the Status Files
-=> git status => git status -s [Short Status]
+git clone <url>
+Copies a remote repository to your machine.
 
-View Difference
-=> git diff [ Find difference between commited and unstaged files ] => git diff --staged [difference in staged files]
+git clone <url> <folder>
+Clones repo into a specific folder.
 
-To Remove File From git
-=> git rm filename
+🔹 3. Repository Status & Info
 
-To Move File
-=> git mv file_from file_to [If we rename the file]
+git status
+Shows current repo status.
 
-To Move staged file to not staged
-=> git reset HEAD => git reset HEAD file1.txt
+git status -s
+Short status format.
 
-To Unmodifying a Modified File
-=> git checkout filename
+git show
+Shows details of the latest commit.
 
-To View Commit History
-=> git log => git log --oneline [Oneline Easy and Fast] => git log --stat [More History] => git log --pretty=oneline [Show SHA1 Value] => git log --pretty=format:"%h %s" --graph => git log --pretty=format:"%h - %an, %ar : %s" => git log --since=2.weeks => git log --after=2.weeks => git log --author "Bishworaj Poudel" => git log --oneline --decorate --graph --all
+git show <commit>
+Shows details of a specific commit.
 
-To ignore files:
-=> create .gitignore file => then add filename/foldername line by line => *.c => ignore al .c files => !main.c => not ignore main.c file => node_modules/ => Directory node_modules and all files inside it.
+🔹 4. Staging & File Tracking
 
-To Unstaging a Staged File with git restore
-=> git restore => git restore --staged file1.txt
+git add <file>
+Stages a file.
 
-To Work With Remote Repository
-=> git remote show origin [To View Remote Origin Details] => git remote -v => git remote add origin : => git push origin master => git pull => pull data with current head => git fetch => only download the data to local repository => git fetch origin mod => To retrive remote branch => git remote rename pb paul => git remote remove paul => git push origin --delete bad-branch-name
+git add .
+Stages all changes.
 
-Git Tag
-=> git tag -l => git tag --list => git tag -a v1.4 -m "my version 1.4" => git show v1.4 => git tag v1.4-lw [Lightweigt] => git tag -d v1.4-lw => git checkout v2.0.0
+git add -A
+Stages all changes (including deletions).
 
-To Transfer Tag to Remote
-=> git push origin .
+git reset <file>
+Unstages a file.
 
-Working With Branch
-=> git branch testing [To Creating Testing Branch] => git checkout testing [Switch Branch] => git commit -am 'made a change' => git checkout master [To Move to Master Branch] => git checkout -b .[Creating branch and switching to it] => git branch --merged => git branch --no-merged => git branch --move bad-branch-name corrected-branch-name
+git restore <file>
+Discards file changes.
 
-Redo Commit
-=> git reset => git reset SHA1 => git reset -hard SHA1
+git restore --staged <file>
+Removes file from staging area.
 
-Git Stash
-=> git stash save => git stash list => git stash pop => git stash apply stash{0} => git stash clear => git stash grop stash
+git rm <file>
+Deletes a file and stages deletion.
 
-Merge
-git merge branchname git merge --no-ff branch name
+git rm --cached <file>
+Stops tracking file but keeps it.
 
-Rebase
+git mv old new
+Renames or moves a file.
 
-git rebase branchname
+🔹 5. Committing
+
+git commit -m "message"
+Commits staged changes.
+
+git commit -am "message"
+Adds and commits tracked files.
+
+git commit --amend
+Edits last commit.
+
+git commit --amend -m "new message"
+Changes last commit message.
+
+🔹 6. Commit History & Logs
+
+git log
+Shows commit history.
+
+git log --oneline
+Compact commit history.
+
+git log --graph
+Visual commit tree.
+
+git log --all --decorate --oneline --graph
+Full visual history.
+
+git reflog
+Tracks all Git actions (recovery tool).
+
+🔹 7. Branching
+
+git branch
+Lists branches.
+
+git branch <name>
+Creates new branch.
+
+git branch -d <branch>
+Deletes branch safely.
+
+git branch -D <branch>
+Forces branch deletion.
+
+git branch -m <new-name>
+Renames current branch.
+
+🔹 8. Switching Branches
+
+git checkout <branch>
+Switches branch (old way).
+
+git checkout -b <branch>
+Creates and switches branch.
+
+git switch <branch>
+Modern way to switch branches.
+
+git switch -c <branch>
+Creates and switches branch.
+
+🔹 9. Merging & Rebasing
+
+git merge <branch>
+Merges branch into current branch.
+
+git merge --no-ff <branch>
+Creates merge commit.
+
+git merge --abort
+Cancels merge.
+
+git rebase <branch>
+Re-applies commits on top of another branch.
+
+git rebase --abort
+Cancels rebase.
+
+git rebase --continue
+Continues rebase after conflict resolution.
+
+git cherry-pick <commit>
+Applies specific commit.
+
+🔹 10. Remote Repositories
+
+git remote
+Lists remote names.
+
+git remote -v
+Shows remote URLs.
+
+git remote add origin <url>
+Adds remote repository.
+
+git remote remove origin
+Removes remote.
+
+git fetch
+Downloads changes only.
+
+git pull
+Fetches and merges changes.
+
+git pull --rebase
+Pulls using rebase.
+
+git push
+Pushes commits to remote.
+
+git push -u origin <branch>
+Sets upstream branch.
+
+git push --force
+Force push (dangerous).
+
+🔹 11. Undo & Reset
+
+git reset --soft HEAD~1
+Undo commit, keep changes staged.
+
+git reset --mixed HEAD~1
+Undo commit, keep changes unstaged.
+
+git reset --hard HEAD~1
+Deletes commit and changes.
+
+git checkout -- <file>
+Discards file changes.
+
+git revert <commit>
+Creates commit that undoes changes.
+
+🔹 12. Diff & Inspection
+
+git diff
+Shows unstaged changes.
+
+git diff --staged
+Shows staged changes.
+
+git diff branch1 branch2
+Compares branches.
+
+git blame <file>
+Shows who changed each line.
+
+🔹 13. Stashing
+
+git stash
+Saves uncommitted work.
+
+git stash list
+Shows stash entries.
+
+git stash pop
+Restores last stash.
+
+git stash apply
+Applies stash without deleting it.
+
+git stash drop
+Deletes stash.
+
+git stash clear
+Deletes all stashes.
+
+🔹 14. Tags & Releases
+
+git tag
+Lists tags.
+
+git tag v1.0
+Creates lightweight tag.
+
+git tag -a v1.0 -m "message"
+Creates annotated tag.
+
+git push origin --tags
+Pushes tags to remote.
+
+🔹 15. Cleanup & Maintenance
+
+git clean -f
+Removes untracked files.
+
+git clean -fd
+Removes untracked files and folders.
+
+git gc
+Optimizes repository.
+
+git fsck
+Checks repo integrity.
+
+🔹 16. Archives & Export
+
+git archive --format=zip HEAD > project.zip
+Exports repo as ZIP.
+
+🔹 17. Submodules
+
+git submodule add <repo>
+Adds submodule.
+
+git submodule update
+Updates submodule.
+
+git submodule init
+Initializes submodules.
+
+🔹 18. Advanced Recovery
+
+git reflog
+Shows all HEAD movements.
+
+git reset --hard <reflog-id>
+Restores lost commits.
